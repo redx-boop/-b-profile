@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera & QR Authentication System</title>
+  <link rel="stylesheet" href="/public/css/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Production-Ready Authentication Suite</p>
+        <h1>Camera & QR Code Based User Authentication</h1>
+        <p class="subtitle">
+          Secure sign up and login with automatic camera capture, unique QR generation, and real-time verification.
+        </p>
+      </div>
+      <div class="status-card">
+        <h3>System Status</h3>
+        <ul>
+          <li>✅ Camera auto-capture enabled</li>
+          <li>✅ QR generation on signup</li>
+          <li>✅ Dual login methods</li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card" id="signup-card">
+        <h2>Sign Up (Auto QR Generation)</h2>
+        <p class="muted">Register once. Your QR code is generated immediately after signup.</p>
+        <form id="signup-form">
+          <label>
+            Username
+            <input type="text" id="signup-username" placeholder="Enter username" required />
+          </label>
+          <label>
+            Password
+            <input type="password" id="signup-password" placeholder="Enter password" required />
+          </label>
+          <div class="camera-wrapper">
+            <video id="signup-video" autoplay playsinline></video>
+            <canvas id="signup-canvas"></canvas>
+            <div class="camera-overlay">Auto-capturing in <span id="signup-countdown">3</span>...</div>
+          </div>
+          <button type="button" class="secondary" id="signup-start">Enable Camera</button>
+          <button type="submit" class="primary">Complete Signup</button>
+        </form>
+        <div class="result" id="signup-result"></div>
+        <div class="qr-display" id="signup-qr-display">
+          <h3>Your Personal QR Code</h3>
+          <img id="signup-qr-image" alt="Generated QR code" />
+          <div class="qr-actions">
+            <a id="qr-download" class="secondary" download>Download QR</a>
+            <button class="secondary" id="qr-print">Print QR</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="camera-login-card">
+        <h2>Camera Login</h2>
+        <p class="muted">Look at the camera. We will capture a fresh image automatically.</p>
+        <form id="camera-login-form">
+          <label>
+            Username
+            <input type="text" id="camera-username" placeholder="Enter username" required />
+          </label>
+          <div class="camera-wrapper">
+            <video id="login-video" autoplay playsinline></video>
+            <canvas id="login-canvas"></canvas>
+            <div class="camera-overlay">Auto-capturing in <span id="login-countdown">3</span>...</div>
+          </div>
+          <button type="button" class="secondary" id="login-start">Enable Camera</button>
+          <button type="submit" class="primary">Login with Camera</button>
+        </form>
+        <div class="result" id="camera-login-result"></div>
+      </section>
+
+      <section class="card" id="qr-login-card">
+        <h2>QR Code Login</h2>
+        <p class="muted">Scan your personal QR code to authenticate instantly.</p>
+        <div class="camera-wrapper">
+          <video id="qr-video" autoplay playsinline></video>
+          <canvas id="qr-canvas"></canvas>
+          <div class="camera-overlay">Scanning for QR...</div>
+        </div>
+        <button type="button" class="secondary" id="qr-start">Enable QR Scanner</button>
+        <div class="result" id="qr-login-result"></div>
+      </section>
+    </main>
+
+    <section class="card flow-card">
+      <h2>System Flow (At a Glance)</h2>
+      <div class="flow-grid">
+        <div>
+          <h4>1. Auto Camera Capture</h4>
+          <p>Browser permission triggers external USB camera. Image is captured automatically on countdown.</p>
+        </div>
+        <div>
+          <h4>2. Secure Signup</h4>
+          <p>We hash passwords with bcrypt, store the image securely, and generate a unique UUID per user.</p>
+        </div>
+        <div>
+          <h4>3. QR Generation</h4>
+          <p>A unique QR token is created server-side and saved to MySQL with the QR image path.</p>
+        </div>
+        <div>
+          <h4>4. Dual Login</h4>
+          <p>Login with either a fresh camera capture or QR scan — both validated on the backend.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script src="/public/js/app.js"></script>
+</body>
+</html>
